@@ -6,7 +6,7 @@ from backend.models import IntentModel
 
 class IntentExtractor:
     def __init__(self, api_key: str = None):
-        self.api_key = api_key or os.environ.get("NVIDIA_API_KEY")
+        self.api_key = api_key or os.environ.get("NVIDIA_KEY")
         self.endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
         self.model = "meta/llama-3.1-405b-instruct"
 

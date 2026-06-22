@@ -26,7 +26,7 @@ let lastTestReport: any = null;
 
 // Dynamic NVIDIA NIM API generation processor
 async function generateWithNvidiaNIM(systemPrompt: string, userPrompt: string): Promise<any> {
-  const apiKey = process.env.NVIDIA_API_KEY || "";
+  const apiKey = process.env.NVIDIA_KEY || "";
   const model = "meta/llama-3.1-70b-instruct";
 
   console.log(`[NVIDIA NIM] Triggering custom instruction pipeline over ${model}...`);
