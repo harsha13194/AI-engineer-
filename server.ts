@@ -26,9 +26,9 @@ let lastTestReport: any = null;
 
 // Dynamic NVIDIA NIM API generation processor
 async function generateWithNvidiaNIM(systemPrompt: string, userPrompt: string): Promise<any> {
-  const apiKey = process.env.NVIDIA_API_KEY || "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";
+  const apiKey = process.env.NVIDIA_API_KEY || "";
   const model = "meta/llama-3.1-70b-instruct";
-  
+
   console.log(`[NVIDIA NIM] Triggering custom instruction pipeline over ${model}...`);
   const response = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
     method: "POST",
@@ -57,7 +57,7 @@ async function generateWithNvidiaNIM(systemPrompt: string, userPrompt: string): 
   if (!text) {
     throw new Error("Empty choices array returned from NVIDIA NIM.");
   }
-  
+
   // Clean markdown fencing
   let cleanText = text;
   if (cleanText.includes("```")) {
@@ -93,7 +93,7 @@ async function generateWithNvidiaNIM(systemPrompt: string, userPrompt: string): 
 // Heuristic fallback systems for offline/robust compilation
 function getHeuristicIntent(prompt: string) {
   const p = prompt.toLowerCase();
-  
+
   if (p.includes("viktor") || p.includes("oddy") || p.includes("creative studio") || p.includes("design studio")) {
     return {
       app_type: "Creative Studio Landing & Showcase",
@@ -158,7 +158,7 @@ function getHeuristicIntent(prompt: string) {
 
 function getHeuristicDesign(intent: any) {
   const appType = intent.app_type.toLowerCase();
-  
+
   if (appType.includes("creative") || appType.includes("showcase") || appType.includes("viktor")) {
     return {
       entities: [
@@ -424,7 +424,7 @@ async function getOrGenerateFullBundle(prompt: string): Promise<any> {
   }
 
   console.log("[CACHE MISS] Pre-compiling combined single-shot metadata for prompt:", prompt);
-  
+
   const systemPrompt = `You are an expert full-stack developer and application system architect.
   Analyze the user requirements and generate the entire architectural metadata bundle at once.
   Return speed-optimized JSON response cleanly with NO markdown wraps, NO commentary, and NO explanations outside the JSON block.
@@ -525,7 +525,7 @@ function findInIntentCache(intent: any): any {
   if (!intent) return null;
   const key = JSON.stringify(intent);
   if (intentCache.has(key)) return intentCache.get(key);
-  
+
   // Try structural fallback match by identifying the bundle containing the same intent properties
   for (const bundle of intentCache.values()) {
     if (bundle.intent?.app_type === intent.app_type) {
@@ -542,8 +542,8 @@ function findInDesignCache(design: any): any {
 
   // Try structural fallback match
   for (const bundle of designCache.values()) {
-    if (bundle.design?.entities?.length === design?.entities?.length && 
-        bundle.design?.entities?.[0]?.name === design?.entities?.[0]?.name) {
+    if (bundle.design?.entities?.length === design?.entities?.length &&
+      bundle.design?.entities?.[0]?.name === design?.entities?.[0]?.name) {
       return bundle;
     }
   }
@@ -928,11 +928,11 @@ async function startServer() {
   // Dynamic application compiler
   app.post("/api/stage6/generate-runtime", (req, res) => {
     const { schemas, app_name } = req.body;
-    
+
     // Increment telemetry counters
     metrics.requests_processed += 1;
     const isStudio = app_name.toLowerCase().includes("oddy") || app_name.toLowerCase().includes("creative") || app_name.toLowerCase().includes("portfolio");
-    
+
     res.json({
       success: true,
       generated_files: [
@@ -976,7 +976,7 @@ async function startServer() {
         { id: "edge_10", title: "Missing Administrative Roles", status: "passed", latency_ms: 880, repair_applied: false, score: 100 }
       ]
     };
-    
+
     lastTestReport = mockEvaluations;
     res.json(mockEvaluations);
   });
