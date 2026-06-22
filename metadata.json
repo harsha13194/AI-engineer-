@@ -1,0 +1,6 @@
+{
+  "name": "AI Engineer",
+  "description": "An interactive, execution-aware production-grade pipeline compiling natural language requirements into intent models, system architectures, validated consistent schemas, and executable web applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
