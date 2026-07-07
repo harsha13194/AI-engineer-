@@ -3,7 +3,8 @@ dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 // Auto-detect production mode when running the compiled bundle
-if (__dirname.includes("dist")) {
+const isProduction = process.argv[1] && process.argv[1].includes("dist");
+if (isProduction) {
   process.env.NODE_ENV = "production";
 }
 
