@@ -4,7 +4,7 @@ import {
   BarChart4, ArrowRight, RefreshCw, Layers, Sparkles,
   Globe, Mic, ArrowUp, Info, Plus, ChevronDown, Trash2,
   Lock, FileCode, PlayCircle, Layers3, Activity, Command, ArrowLeft, Copy,
-  Moon, Minus, Maximize2, Minimize2
+  Minus, Maximize2, Minimize2
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -539,7 +539,7 @@ export default function App() {
             className="flex items-center gap-2.5 cursor-pointer select-none"
           >
             <div className="relative w-8 h-8 rounded-full shrink-0 flex items-center justify-center bg-slate-900 border border-slate-750 shadow-sm text-yellow-400">
-              <Moon className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
+              <Sparkles className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
             </div>
             <div className="leading-none text-left">
               <span className="font-extrabold text-[17px] text-slate-900 tracking-tight block">
